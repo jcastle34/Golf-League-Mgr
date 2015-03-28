@@ -9,6 +9,13 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<% if user_signed_in?  %>
+    <p style="width: 100%;">
+      <%= link_to 'Home', root_path %> |
+      <%= link_to 'Golfers', golfers_path %> |
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+    </p>
+<% end %>
 <%= yield %>
 
 </body>
