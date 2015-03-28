@@ -1,4 +1,7 @@
 GolfLeagueMgr::Application.routes.draw do
+  resources :league_teams
+
+
   resources :golfers
 
 
