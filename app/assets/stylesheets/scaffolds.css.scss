@@ -39,6 +39,14 @@ div {
   color: green;
 }
 
+.float-right{
+  float: right !important;
+}
+
+.float-left{
+  float: left !important;
+}
+
 .field_with_errors {
   padding: 2px;
   background-color: red;
@@ -66,4 +74,12 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.league-standings {
+   width: 400px;
+}
+
+.league-members {
+  width: 300px;
 }
