@@ -1,6 +1,6 @@
 <h1>My Leagues</h1>
 <% @my_leagues.each do |league| %>
     <div>
-      <%= link_to "#{league.year} #{league.name}", league_path(1) %>
+      <%= link_to "#{league.year} #{league.name}", league_path(league.id) %>
     </div>
 <% end %>

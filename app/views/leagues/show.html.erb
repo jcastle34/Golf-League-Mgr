@@ -1,8 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @league.name %>
-</p>
+<h1><%= @league.name %></h1>
 
+<div class="float-left league-standings">
+    <h2>Standings</h2>
+</div>
 
+<div class="float-left league-members">
+  <h2>Members</h2>
+  <% @members.each do |member| %>
+      <div><%= member.full_name %></div>
+  <% end %>
+</div>
+
+<div class="float-left">
+  <h2>Teams</h2>
+  <% @teams.each do |team| %>
+      <div><%= team.name %></div>
+  <% end %>
+</div>
