@@ -1,9 +1,8 @@
 GolfLeagueMgr::Application.routes.draw do
+
+  resources :leagues
   resources :league_teams
-
-
   resources :golfers
-
 
   devise_for :users
 
@@ -56,7 +55,7 @@ GolfLeagueMgr::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'league#index'
+  root :to => 'leagues#index'
 
   # See how all your routes lay out with "rake routes"
 
