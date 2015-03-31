@@ -15,7 +15,7 @@ class LeaguesController < ApplicationController
   def show
     @league = League.find(params[:id])
     @members = Golfer.joins(:leagues).where('league_id = ?', @league.id)
-    @teams = LeagueTeam.where(league_id = @league.id)
+    @teams = LeagueTeam.where('league_id = ?', @league.id)
 
     respond_to do |format|
       format.html # show.html.erb
