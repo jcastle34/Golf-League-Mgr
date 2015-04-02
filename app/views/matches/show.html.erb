@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @match.name %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @match.date.localtime.strftime('%B %-d %Y') %>
+</p>
+
+<p>
+  <b>League:</b>
+  <%= @match.league_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

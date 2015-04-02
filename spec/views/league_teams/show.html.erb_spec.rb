@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "league_teams/show" do
+describe "teams/show" do
   before(:each) do
-    @league_team = assign(:league_team, stub_model(LeagueTeam,
+    @team = assign(:team, stub_model(Team,
       :name => "Name",
       :league_id => 1
     ))

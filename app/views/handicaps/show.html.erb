@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Score:</b>
+  <%= @handicap.score %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @handicap.date %>
+</p>
+
+<p>
+  <b>Golfer:</b>
+  <%= @handicap.golfer_id %>
+</p>
+
+<p>
+  <b>League:</b>
+  <%= @handicap.league_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_handicap_path(@handicap) %> |
+<%= link_to 'Back', handicaps_path %>

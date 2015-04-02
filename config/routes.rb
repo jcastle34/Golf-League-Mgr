@@ -1,9 +1,18 @@
 GolfLeagueMgr::Application.routes.draw do
 
+  resources :scores
+
+
+  resources :handicaps
+
+
+  resources :matches
+
+
   get "admins/index"
 
   resources :leagues
-  resources :league_teams
+  resources :teams
   resources :golfers
   resources :admins
 

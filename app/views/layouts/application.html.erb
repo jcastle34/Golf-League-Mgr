@@ -19,7 +19,7 @@
 </div>
 <div class="float-right main-navigation">
   <% if user_signed_in? %>
-      Signed in as <%= link_to current_user.golfer.full_name, edit_user_registration_path, :id => "edit_user" %> |
+      Current user is <%= link_to current_user.golfer.full_name, edit_user_registration_path, :id => "edit_user" %> |
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
   <% end %>
 </div>

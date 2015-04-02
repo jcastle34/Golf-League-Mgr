@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe "league_teams/index" do
+describe "teams/index" do
   before(:each) do
-    assign(:league_teams, [
-      stub_model(LeagueTeam,
+    assign(:teams, [
+      stub_model(Team,
         :name => "Name",
         :league_id => 1
       ),
-      stub_model(LeagueTeam,
+      stub_model(Team,
         :name => "Name",
         :league_id => 1
       )
     ])
   end
 
-  it "renders a list of league_teams" do
+  it "renders a list of teams" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Name".to_s, :count => 2

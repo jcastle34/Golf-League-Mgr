@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hole:</b>
+  <%= @score.hole %>
+</p>
+
+<p>
+  <b>Strokes:</b>
+  <%= @score.strokes %>
+</p>
+
+<p>
+  <b>Match:</b>
+  <%= @score.match_id %>
+</p>
+
+<p>
+  <b>Golfer:</b>
+  <%= @score.golfer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_score_path(@score) %> |
+<%= link_to 'Back', scores_path %>

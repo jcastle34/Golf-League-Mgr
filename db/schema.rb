@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150329210512) do
+ActiveRecord::Schema.define(:version => 20150402022157) do
+
+  create_table "courses", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "zip_code"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "golfers", :force => true do |t|
     t.string   "first_name"
@@ -26,16 +37,57 @@ ActiveRecord::Schema.define(:version => 20150329210512) do
     t.integer "league_id"
   end
 
-  create_table "league_teams", :force => true do |t|
-    t.string   "name"
+  create_table "golfers_teams", :id => false, :force => true do |t|
+    t.integer "golfer_id"
+    t.integer "team_id"
+  end
+
+  create_table "handicaps", :force => true do |t|
+    t.integer  "score"
+    t.date     "date"
+    t.integer  "golfer_id"
     t.integer  "league_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  create_table "holes", :force => true do |t|
+    t.integer  "number"
+    t.integer  "par"
+    t.integer  "yards"
+    t.integer  "course_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "handicap"
+  end
+
   create_table "leagues", :force => true do |t|
     t.string   "name"
     t.integer  "year"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "matches", :force => true do |t|
+    t.string   "name"
+    t.datetime "date"
+    t.integer  "league_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "hole"
+    t.integer  "strokes"
+    t.integer  "match_id"
+    t.integer  "golfer_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.integer  "league_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
