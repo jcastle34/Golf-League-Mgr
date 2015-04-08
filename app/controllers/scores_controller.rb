@@ -37,7 +37,7 @@ class ScoresController < ApplicationController
     @score = Score.find(params[:id])
   end
 
-  # POST /scores
+    # POST /scores
   # POST /scores.json
   def create
     @score = Score.new(params[:score])
@@ -66,6 +66,16 @@ class ScoresController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @score.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update_scores_for_match
+    @scores = Score.update(params[:scores].keys, params[:scores].values).reject { |s| s.errors.empty? }
+    if @scores.empty?
+      flash[:notice] = "Scores updated"
+      redirect_to matches_url
+    else
+      render :action => "edit_scores_for_match"
     end
   end
 

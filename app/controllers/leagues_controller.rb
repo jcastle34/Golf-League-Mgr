@@ -14,10 +14,11 @@ class LeaguesController < ApplicationController
   # GET /leagues/1.json
   def show
     @league = League.find(params[:id])
+    @current_league = @league
     @members = Golfer.joins(:leagues).where('league_id = ?', @league.id)
     @teams = Team.where('league_id = ?', @league.id).includes(:golfers)
-    @upcoming_matches = Match.where('league_id = ?', @league.id)
-
+    @upcoming_matches = Match.where('league_id = ?', @league.id).includes(:golfers)
+    @rounds = Round.where('rounds.league_id = ?', @league.id).order(date: :asc)
 
     respond_to do |format|
       format.html # show.html.erb

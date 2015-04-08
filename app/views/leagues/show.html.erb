@@ -29,13 +29,19 @@
 </div>
 <div style="clear:both;"></div>
 <div>
-  <div>
-    <h2>Matches</h2>
-    <% @upcoming_matches.each do |match| %>
-        <div>
-          <%= match.date.localtime.strftime('%B %-d %Y') %> :
-          <%= match.name %>
+  <div class="float-left">
+    <h2>Rounds</h2>
+    <% @rounds.each do |round| %>
+        <div style="padding-top:5px">
+            <%= round.number %> -
+            <%= round.date %>
         </div>
+        <% if round.date == Date.parse('2015-04-21')%>
+            <% round.matches.each do |match| %>
+                <div style="padding-left:10px"><%= match.name %></div>
+            <% end %>
+        <% end %>
     <% end %>
   </div>
+  <div style="clear:both;"></div>
 </div>

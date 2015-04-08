@@ -1,3 +1,40 @@
 // Place all the styles related to the Scores controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.score-card-par {
+  background-color: #ffff00;
+  color: #000000;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #000000;
+  min-width: 50px;
+}
+
+.score-card-handicap {
+  background-color: turquoise;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #000000;
+  min-width: 50px;
+}
+
+.score-card-hole {
+  background-color: #008000;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #000000;
+  min-width: 50px;
+}
+
+.score-card-score {
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border: 1px solid #000000;
+  min-width: 50px;
+}
