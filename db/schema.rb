@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150402022157) do
+ActiveRecord::Schema.define(:version => 20150408025845) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20150402022157) do
   create_table "golfers_leagues", :id => false, :force => true do |t|
     t.integer "golfer_id"
     t.integer "league_id"
+  end
+
+  create_table "golfers_matches", :id => false, :force => true do |t|
+    t.integer "golfer_id"
+    t.integer "match_id"
   end
 
   create_table "golfers_teams", :id => false, :force => true do |t|
@@ -74,10 +79,25 @@ ActiveRecord::Schema.define(:version => 20150402022157) do
     t.integer  "league_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "round_id"
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.integer  "number"
+    t.date     "date"
+    t.integer  "course_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "league_id"
+  end
+
+  create_table "rounds_teams", :id => false, :force => true do |t|
+    t.integer "round_id"
+    t.integer "team_id"
   end
 
   create_table "scores", :force => true do |t|
-    t.integer  "hole"
+    t.integer  "hole_id"
     t.integer  "strokes"
     t.integer  "match_id"
     t.integer  "golfer_id"
