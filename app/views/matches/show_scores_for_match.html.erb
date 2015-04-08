@@ -1,0 +1,48 @@
+<h1>Listing Scores for the Match</h1>
+
+<% @scores.each do |score| %>
+    <% if score.hole.number == 1 %>
+        <div style="padding: 5px">
+          <span style="color: #0000ff; font-weight: bold">Golfer:</span> <%= score.golfer.full_name %>
+        </div>
+        <div style="padding: 5px">
+          <span style="color: #0000ff; font-weight: bold">Handicap:</span> <%= score.golfer.handicaps[0].score %>
+        </div>
+    <% end %>
+    <div class="float-left">
+      <% if score.hole.number == 1 %>
+          <div class="float-left">
+            <div class="score-card-hole">Hole</div>
+            <div class="score-card-par">Par</div>
+            <div class="score-card-handicap">Handicap</div>
+            <div class="score-card-score">Score</div>
+          </div>
+      <% end %>
+      <div class="float-left">
+        <div class="score-card-hole"><%= score.hole.number %></div>
+        <div class="score-card-par"><%= score.hole.par %></div>
+        <div class="score-card-handicap"><%= score.hole.handicap %></div>
+        <div class="float-left score-card-score">
+          <%= score.strokes %>
+          <% score.strokes.nil? ? @total_strokes = @total_strokes + 0 : @total_strokes = @total_strokes + score.strokes %>
+          <% @total_par = @total_par + score.hole.par %>
+        </div>
+      </div>
+
+    </div>
+    <% if score.hole.number == 9 %>
+        <div class="float-left">
+          <div class="score-card-hole">Total</div>
+          <div class="score-card-par"><%= @total_par %></div>
+          <div class="score-card-handicap">&nbsp;</div>
+          <div class="score-card-score"><%= @total_strokes %></div>
+          <% @total_strokes = 0 %>
+          <% @total_par = 0 %>
+        </div>
+        <div style="clear:both; padding-bottom: 20px"></div>
+    <% end %>
+<% end %>
+
+<br/>
+
+<td><%= link_to 'Edit', match_edit_scores_for_match_path(@match_id) %></td>

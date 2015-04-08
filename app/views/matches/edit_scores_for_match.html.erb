@@ -1,0 +1,32 @@
+<h1>Edit Scores for the Match</h1>
+
+<%= form_tag match_update_scores_for_match_path :method => :put do %>
+    <% for score in @scores %>
+        <%= fields_for "scores[]", score do |f| %>
+            <% if score.hole.number == 1 %>
+                <div class="field">
+                  <%= f.label :golfer_id %>:
+                  <%= score.golfer.full_name %>
+                </div>
+            <% end %>
+            <div class="float-left">
+                <div class="field">
+                  <%= f.label :hole %>
+                  <%= score.hole.number %>
+                </div>
+                <div class="field">
+                  <%= f.number_field :strokes, {:min => 0, :size => 2} %>
+                </div>
+            </div>
+            <% if score.hole.number == 9 %>
+                <div style="clear:both"></div>
+            <% end %>
+        <% end %>
+    <% end %>
+
+    <div class="actions">
+      <%= submit_tag "Submit" %>
+    </div>
+<% end %>
+
+<%= link_to 'Back', match_show_scores_for_match_path(@match_id) %>

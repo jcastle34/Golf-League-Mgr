@@ -15,6 +15,10 @@
   <%= @match.league_id %>
 </p>
 
+<p>
+  <b>Opponents:</b>
+  <%= @match.golfers[0].full_name %> vs. <%= @match.golfers[1].full_name %>
+</p>
 
 <%= link_to 'Edit', edit_match_path(@match) %> |
 <%= link_to 'Back', matches_path %>

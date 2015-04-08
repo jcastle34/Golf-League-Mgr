@@ -1,10 +1,12 @@
-<h1>Listing matches</h1>
+<h1>Listing Matches</h1>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Date</th>
     <th>League</th>
+    <th>Opponents</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +17,12 @@
     <td><%= match.name %></td>
     <td><%= match.date.localtime.strftime('%B %-d %Y') %></td>
     <td><%= match.league_id %></td>
+    <td>
+        <%= match.golfers[0].full_name %> vs. <%= match.golfers[1].full_name %>
+    </td>
     <td><%= link_to 'Show', match %></td>
     <td><%= link_to 'Edit', edit_match_path(match) %></td>
+    <td><%= link_to 'Scores', match_show_scores_for_match_path(match) %></td>
     <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
