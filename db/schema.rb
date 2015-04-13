@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150408025845) do
+ActiveRecord::Schema.define(:version => 20150413031112) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -77,9 +77,17 @@ ActiveRecord::Schema.define(:version => 20150408025845) do
     t.string   "name"
     t.datetime "date"
     t.integer  "league_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "round_id"
+    t.boolean  "is_front_side"
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "score_id"
+    t.float    "amount"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "round_id"
   end
 
   create_table "rounds", :force => true do |t|
@@ -101,8 +109,10 @@ ActiveRecord::Schema.define(:version => 20150408025845) do
     t.integer  "strokes"
     t.integer  "match_id"
     t.integer  "golfer_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.float    "points",           :default => 0.0
+    t.integer  "handicap_strokes", :default => 0
   end
 
   create_table "teams", :force => true do |t|
