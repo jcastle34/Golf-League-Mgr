@@ -1,0 +1,61 @@
+<h1>Edit Scores for the Match</h1>
+
+<%= form_tag round_match_update_score_card_path(@match.round.id, @match) do %>
+    <% @scores.each do |score| %>
+        <%= fields_for "scores[]", score do |f| %>
+        <% if score.hole.number == 1 || score.hole.number == 10 %>
+            <div class="float-left">
+              <div style="padding: 5px">
+                <span style="color: #000000; font-weight: bold">Golfer:</span> <%= score.golfer.full_name %>
+              </div>
+              <div style="padding: 5px">
+                <span style="color: #0000ff; font-weight: bold">Handicap:</span> <%= score.golfer.handicap.score %>
+              </div>
+            </div>
+        <% end %>
+        <div class="float-left">
+          <% if score.hole.number == 1 || score.hole.number == 10 %>
+              <div class="float-left">
+                <div class="score-card-hole">Hole</div>
+                <div class="score-card-par">Par</div>
+                <div class="score-card-handicap">Handicap</div>
+                <div class="score-card-score">Handicap Strokes</div>
+                <div class="score-card-edit-score">Score</div>
+              </div>
+          <% end %>
+          <div class="float-left">
+            <div class="score-card-hole"><%= score.hole.number %></div>
+            <div class="score-card-par"><%= score.hole.par %></div>
+            <div class="score-card-handicap"><%= score.hole.handicap %></div>
+            <div class="score-card-score"><%= score.handicap_strokes %></div>
+            <div class="score-card-score">
+              <%= f.number_field :strokes, {:min => 0, :size => 2, :style => "width:30px"} %>
+              <% score.strokes.nil? ? @total_strokes = @total_strokes + 0 : @total_strokes = @total_strokes + score.strokes %>
+              <% @total_par = @total_par + score.hole.par %>
+              <% @total_handicap_strokes = @total_handicap_strokes + score.handicap_strokes %>
+            </div>
+          </div>
+
+        </div>
+        <% if score.hole.number == 9 || score.hole.number == 18 %>
+            <div class="float-left">
+              <div class="score-card-hole">Total</div>
+              <div class="score-card-par"><%= @total_par %></div>
+              <div class="score-card-handicap">&nbsp;</div>
+              <div class="score-card-score"><b><%= @total_handicap_strokes %></b></div>
+              <div class="score-card-edit-score"><b><%= @total_strokes %></b></div>
+              <% @total_strokes = 0 %>
+              <% @total_par = 0 %>
+            </div>
+            <div style="clear:both; padding-bottom: 20px"></div>
+        <% end %>
+        <% end %>
+    <% end %>
+
+
+    <div class="actions">
+      <%= submit_tag "Submit" %>
+    </div>
+<% end %>
+
+<%= link_to 'Back', round_match_show_score_card_path(@match.round.id, @match) %>

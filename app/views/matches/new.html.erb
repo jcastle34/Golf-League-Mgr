@@ -1,6 +1,6 @@
 <h1>New Match</h1>
 
-<%= form_for(@match) do |f| %>
+<%= form_for([@round, @match]) do |f| %>
     <% if @match.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
@@ -24,6 +24,11 @@
       <%= f.text_field :name %>
     </div>
     <div class="field">
+      <%= f.label :date %>
+      <br/>
+      <%= f.datetime_select :date, ampm: true %>
+    </div>
+    <div class="field">
       <%= f.label 'Opponent' %>
       <br/>
       <%= select(:golfer, 'first_opponent', Golfer.all.collect { |u| [u.full_name, u.id] }, {:include_blank => true}) %>
@@ -34,13 +39,15 @@
       <%= select(:golfer, 'second_opponent', Golfer.all.collect { |u| [u.full_name, u.id] }, {:include_blank => true}) %>
     </div>
     <div class="field">
-      <%= f.label :date %>
+      <%= radio_button(:match, :is_front_side, 1, :checked => true) %>
+      <%= f.label 'Front Side' %>
       <br/>
-      <%= f.datetime_select :date %>
+      <%= radio_button(:match, :is_front_side, 0) %>
+      <%= f.label 'Back Side' %>
     </div>
     <div class="actions">
       <%= f.submit %>
     </div>
 <% end %>
 
-<%= link_to 'Back', matches_path %>
+<%= link_to 'Back', round_matches_path %>

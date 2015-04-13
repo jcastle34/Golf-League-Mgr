@@ -2,17 +2,19 @@ GolfLeagueMgr::Application.routes.draw do
 
   resources :scores
   resources :handicaps
-  resources :matches do
-    get :show_scores_for_match, to: 'matches#show_scores_for_match'
-    get :edit_scores_for_match, to: 'matches#edit_scores_for_match'
-    post :update_scores_for_match, to: 'matches#update_scores_for_match'
-    resources :scores
+  resources :rounds do
+    resources :matches do
+      get :show_score_card, to: 'matches#show_score_card'
+      get :edit_score_card, to: 'matches#edit_score_card'
+      post :update_score_card, to: 'matches#update_score_card'
+    end
   end
   resources :leagues
   resources :teams
   resources :golfers
   resources :admins
   resources :rounds
+  resources :scores
 
   get "admins/index"
 

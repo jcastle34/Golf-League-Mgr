@@ -6,7 +6,7 @@ class Golfer < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :matches
   has_many :scores
-  has_many :handicaps
+  has_one :handicap
 
   def full_name
     "#{first_name} #{last_name}"

@@ -2,7 +2,7 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.json
   def index
-    @matches = Match.includes(:golfers)
+    @matches = Match.includes(:golfers).where('round_id = ?', params[:round_id])
     @total_strokes = 0
 
     respond_to do |format|
@@ -22,11 +22,12 @@ class MatchesController < ApplicationController
     end
   end
 
-  def show_scores_for_match
-    @match_id = params[:match_id]
-    @scores = Score.where('match_id = ?', @match_id)
+  def show_score_card
+    @match = Match.find(params[:match_id])
+    @scores = Score.where('match_id = ?', @match.id)
     @total_strokes = 0
     @total_par = 0
+    @total_handicap_strokes = 0
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +38,8 @@ class MatchesController < ApplicationController
   # GET /matches/new
   # GET /matches/new.json
   def new
-    @match = Match.new
+    @round = Round.find(params[:round_id])
+    @match = Match.new(:round => @round)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,12 +49,17 @@ class MatchesController < ApplicationController
 
   # GET /matches/1/edit
   def edit
-    @match = Match.where('id = ?', params[:id]).includes(:golfers).first
+    @round = Round.find(1)
+    @match = Match.find(params[:id])
   end
 
-  def edit_scores_for_match
-    @match_id = params[:match_id]
-    @scores = Score.where('match_id = ?', @match_id)
+  def edit_score_card
+    @round = Round.find(1)
+    @match = Match.find(params[:match_id])
+    @scores = Score.where('match_id = ?', @match.id)
+    @total_strokes = 0
+    @total_par = 0
+    @total_handicap_strokes = 0
 
     respond_to do |format|
       format.html # show.html.erb
@@ -64,6 +71,7 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
     @match = Match.new(params[:match])
+    @match.round_id = params[:round_id]
     first_opponent = params[:golfer][:first_opponent]
     second_opponent = params[:golfer][:second_opponent]
     @match.golfers << Golfer.find(first_opponent)
@@ -71,8 +79,8 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
-        Match.create_score_card_for_match(@match)
-        format.html { redirect_to @match, notice: 'Match was successfully created.' }
+        @match.create_score_card
+        format.html { redirect_to round_matches_path, notice: 'Match and Scorecard were successfully created.' }
         format.json { render json: @match, status: :created, location: @match }
       else
         format.html { render action: "new" }
@@ -85,10 +93,11 @@ class MatchesController < ApplicationController
   # PUT /matches/1.json
   def update
     @match = Match.find(params[:id])
+    @match.calculate_handicap_strokes
 
     respond_to do |format|
       if @match.update_attributes(params[:match])
-        format.html { redirect_to @match, notice: 'Match was successfully updated.' }
+        format.html { redirect_to round_match_url, notice: 'Match was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -97,13 +106,13 @@ class MatchesController < ApplicationController
     end
   end
 
-  def update_scores_for_match
+  def update_score_card
     @scores = Score.update(params[:scores].keys, params[:scores].values).reject { |s| s.errors.empty? }
     if @scores.empty?
-      flash[:notice] = "Scores updated"
-      redirect_to matches_url
+      flash[:notice] = 'Scorecard was successfully updated'
+      redirect_to round_match_show_score_card_url
     else
-      render :action => "edit_scores_for_match"
+      render :action => 'edit_score_card'
     end
   end
 
@@ -114,7 +123,7 @@ class MatchesController < ApplicationController
     @match.destroy
 
     respond_to do |format|
-      format.html { redirect_to matches_url }
+      format.html { redirect_to round_matches_url }
       format.json { head :no_content }
     end
   end

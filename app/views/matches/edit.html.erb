@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @match %> |
-<%= link_to 'Back', matches_path %>
+<%= link_to 'Show', round_match_path(@match.round.id, @match) %> |
+<%= link_to 'Back', round_matches_path(@match.round.id) %>

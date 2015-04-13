@@ -13,7 +13,7 @@
 
 <% @scores.each do |score| %>
   <tr>
-    <td><%= score.hole %></td>
+    <td><%= score.hole.number %></td>
     <td><%= score.strokes %></td>
     <td><%= score.match_id %></td>
     <td><%= score.golfer.full_name %></td>
@@ -23,4 +23,4 @@
 
 <br />
 
-<td><%= link_to 'Edit', edit_match_score_path(7, 21) %></td>
+<%= link_to 'Edit', round_match_edit_scores_for_match_path() %>

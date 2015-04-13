@@ -1,24 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>League:</b>
+  <%= @match.league.name %>
+</p>
+<p>
+  <b>Date - Time:</b>
+  <%= @match.date.localtime.strftime('%B %-d %Y - %l:%M %p') %>
+</p>
+<p>
   <b>Name:</b>
   <%= @match.name %>
 </p>
-
-<p>
-  <b>Date:</b>
-  <%= @match.date.localtime.strftime('%B %-d %Y') %>
-</p>
-
-<p>
-  <b>League:</b>
-  <%= @match.league_id %>
-</p>
-
 <p>
   <b>Opponents:</b>
   <%= @match.golfers[0].full_name %> vs. <%= @match.golfers[1].full_name %>
 </p>
+<p>
+  <b>Front Side:</b>
+  <%= @match.is_front_side ? 'YES' : 'NO' %>
+</p>
+<p>
+  <b>Back Side:</b>
+  <%= @match.is_front_side ? 'NO' : 'YES' %>
+</p>
 
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
+<%= link_to 'Edit', edit_round_match_path(@match.round.id) %> |
+<%= link_to 'Back', round_matches_path %>
