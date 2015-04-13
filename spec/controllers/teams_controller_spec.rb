@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe LeagueTeamsController do
+describe TeamsController do
 
   # This should return the minimal set of attributes required to create a valid
   # LeagueTeam. As you add validations to LeagueTeam, be sure to
@@ -27,7 +27,7 @@ describe LeagueTeamsController do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # LeagueTeamsController. Be sure to keep this updated too.
+  # TeamsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
